@@ -13,6 +13,7 @@ class Node
 
         Node(string str){
             name = str;
+            visited = false;
         }
 
         void addNode(Node* node, int dist){
