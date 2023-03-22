@@ -19,8 +19,10 @@ Node* createNode(string name){
 
 }
 
-int main(int argc, char* argv[]){
+void fillCityWithBuffer(char *city, char *buffer);
+int getDistanceFromBuffer(int index, char *buffer);
 
+int main(int argc, char* argv[]){
     //variables
     char graph_file_name[] = "Grafo.txt";
     char heuristics_file_name[]  = "Heuristica.txt";
@@ -28,7 +30,7 @@ int main(int argc, char* argv[]){
     char next_ch;
     char city_origin[BUFFER_SIZE] = "______________", city_target[BUFFER_SIZE] = "______________", input_buffer[BUFFER_SIZE] = "______________";
     int distance = 0;
-    int index = 0, factor = 1, state = READ_ORIGIN_CITY_STATE;
+    int index = 0, state = READ_ORIGIN_CITY_STATE;
     map<string /*City Name*/, Node* /*City Node*/> nodes;
 
     //graph file
@@ -44,58 +46,27 @@ int main(int argc, char* argv[]){
         //find new roads
         while((next_ch = fgetc(file_pointer)) != -1)
         {
-            if(next_ch == ';' && state == 0)
+            if(next_ch == ';' && state == READ_ORIGIN_CITY_STATE)
             {
                 //origin city ready to save
-                sprintf(city_origin, "%s", input_buffer);
+                fillCityWithBuffer(city_origin, input_buffer);
 
-                //cleaning input buffer and index
-                index = 0;
-                sprintf(input_buffer, "______________\0");
-
-                //fixing end of string in city_origin
-                while(city_origin[index] != '_' && city_origin[index] != '\0')
-                {
-                    index++;
-                }
-                city_origin[index] = '\0';
-                index = 0;
-
-                //change state
+                //change state and clear index
                 state = READ_TARGET_CITY_STATE;
+                index = 0;
             }
-            else if(next_ch == ';' && state == 1)
+            else if(next_ch == ';' && state == READ_TARGET_CITY_STATE)
             {
                 //target city ready to save
-                sprintf(city_target, "%s", input_buffer);
+                fillCityWithBuffer(city_target, input_buffer);
 
-                //cleaning input buffer and index
-                index = 0;
-                sprintf(input_buffer, "______________\0");
-
-                //fixing end of string in city_target
-                while(city_target[index] != '_' && city_target[index] != '\0')
-                {
-                    index++;
-                }
-                city_target[index] = '\0';
-                index = 0;
-
-                //change state
+                //change state and clear index
                 state = READ_ORIGIN_CITY_STATE;
+                index = 0;
             }
             else if(next_ch == '\n'){
                 //distance ready to save
-                for(index -= 1; index >= 0; index--)
-                {
-                    distance += (input_buffer[index] - 48)*factor;
-                    factor *= 10;
-                }
-
-                //cleaning input buffer
-                factor = 1;
-                index = 0;
-                sprintf(input_buffer, "______________\0");
+                distance = getDistanceFromBuffer(index, input_buffer);
 
                 //save origin city, target city and distance in node
                 if(nodes.find(city_origin) == nodes.end()){ // Checking if origin city already exists in a Node, if not, create a Node for this city
@@ -120,10 +91,11 @@ int main(int argc, char* argv[]){
                 /*
                     There it is, here we can get all info about roads
                 */
-                //printf("%s ate %s sao %dkm\n", city_origin, city_target, distance);
+                // printf("%s;%s;%d\n", city_origin, city_target, distance);
                 ////////////////////////////////////////////////////////////////////////////
 
-                //cleaning distance and city origin
+                //cleaning index, distance, city origin and city target
+                index = 0;
                 distance = 0;
                 sprintf(city_origin, "______________\0");
                 sprintf(city_target, "______________\0");
@@ -137,17 +109,6 @@ int main(int argc, char* argv[]){
         }
     }
     fclose(file_pointer);
-
-    //cleaning variables
-    //printf("\n");
-    distance = 0;
-    factor = 1;
-    index = 0;
-    sprintf(city_origin, "______________\0");
-    sprintf(city_target, "______________\0");
-    sprintf(input_buffer, "______________\0");
-
-
 
     //heuristics file
     file_pointer = fopen(heuristics_file_name, "r");
@@ -168,33 +129,15 @@ int main(int argc, char* argv[]){
             if(next_ch == ';')
             {
                 //origin city ready to save
-                sprintf(city_origin, "%s", input_buffer);
+                fillCityWithBuffer(city_origin, input_buffer);
 
-                //cleaning input buffer and index
-                index = 0;
-                sprintf(input_buffer, "______________\0");
-
-                //fixing end of string in city_origin
-                while(city_origin[index] != '_' && city_origin[index] != '\0')
-                {
-                    index++;
-                }
-                city_origin[index] = '\0';
+                //cleaning index
                 index = 0;
             }
             else if(next_ch == '\n')
             {
                 //distance ready to save
-                for(index -= 1; index >= 0; index--)
-                {
-                    distance += (input_buffer[index] - 48)*factor;
-                    factor *= 10;
-                }
-
-                //cleaning input buffer
-                factor = 1;
-                index = 0;
-                sprintf(input_buffer, "______________\0");
+                distance = getDistanceFromBuffer(index, input_buffer);
 
                 //save origin city and distance in node
                 cout << "H( " << city_origin << " ) : " << distance << endl;
@@ -205,10 +148,12 @@ int main(int argc, char* argv[]){
                 /*
                     There it is, here we can get all info about heuristics
                 */
-                //printf("%s ate %s sao %dkm\n", city_origin, city_target, distance);
+                // printf("%s ate %s sao %d\n", city_origin, city_target, distance);
+                // printf("%s;%d\n", city_origin, distance);
                 ////////////////////////////////////////////////////////////////////////////
 
-                //cleaning distance and city origin
+                //cleaning index, distance and city origin
+                index = 0;
                 distance = 0;
                 sprintf(city_origin, "______________\0");
             }
@@ -305,4 +250,39 @@ int main(int argc, char* argv[]){
 
     return 0;
 
+}
+
+void fillCityWithBuffer(char *city, char *buffer){
+        //variables
+        int index = 0;
+
+        //city ready to save
+        sprintf(city, "%s", buffer);
+
+        //cleaning buffer
+        sprintf(buffer, "______________\0");
+
+        //fixing end of string in city
+        while(city[index] != '_' && city[index] != '\0')
+        {
+            index++;
+        }
+        city[index] = '\0';
+}
+
+int getDistanceFromBuffer(int index, char *buffer){
+    //variables
+    int distance = 0;
+    int factor = 1;
+
+    //to integer
+    for(index -= 1; index >= 0; index--)
+    {
+        distance += (buffer[index] - 48)*factor;
+        factor *= 10;
+    }
+    
+    //cleaning buffer
+    sprintf(buffer, "______________\0");
+    return distance;
 }
