@@ -267,17 +267,44 @@ int main(int argc, char* argv[]){
             stack<string> fastest_way;
             fastest_way.push(city); // Adicionando bucareste na pilha
 
-            while(complete_way == false){
-
+            ///////////////////////////////////////////////////////////////////////////////////
+            // debug mode
+            
+            /*
+                best way
+                Arad | Sibiu | Rimnicu Vilcea | Pitesti | Bucareste
+            */ 
+            // cout << "city_it->first: " << city_it->first << endl;
+            // while(complete_way == false){
+            for(int i = 0; i<6; i++){
                 string previous_node = city_it->second.first->previous_node;
                 fastest_way.push(previous_node);
                 city_it = opened_nodes.find(previous_node);
-
-                if(city_it->first == "Arad"){
+                
+                // Percorrer o map opened_nodes e ver o que tem 
+                // for (auto it = opened_nodes.begin(); it != opened_nodes.end(); ++it){
+                //     cout << "it->second.first->previous_node " << it->second.first->previous_node << endl;
+                // }
+                // cout << endl;
+                // cout << "previus_node: " << previous_node << endl;
+                // cout << "city_it->first: " << city_it->first << endl;
+                // cout << "city_it->second.first->previous_node: " << city_it->second.first->previous_node << endl;
+                if(city_it->second.first->previous_node == "Arad"){
                     complete_way = true;
                 }
                 
+                // city_it = opened_nodes.find(city_it->second.first->previous_node);
+
+                /*
+                    A impressao que tenho eh que falta informacao sobre o anterior do anterior
+                    Desse jeito estamos entrando em loop
+
+                    tem que fazer alguma coisa antes com city_it para que o anterior
+                    de Rimnicu Vilcea seja Sibiu e nao Pitesti
+                */
             }
+
+            ///////////////////////////////////////////////////////////////////////////////////
 
             // Printando o caminho ótimo
             cout << "O melhor caminho para chegar em Bucareste: ";
