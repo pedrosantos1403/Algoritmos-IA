@@ -13,7 +13,7 @@ using namespace std;
 
 Node* createNode(string name){
 
-    cout << name << "  ->  Node created" << endl;
+    //cout << name << "  ->  Node created" << endl;
     Node* node = new Node(name);
     return node;
 
@@ -21,6 +21,7 @@ Node* createNode(string name){
 
 void fillCityWithBuffer(char *city, char *buffer);
 int getDistanceFromBuffer(int index, char *buffer);
+void deleteNode(Node* node);
 
 int main(int argc, char* argv[]){
     //variables
@@ -91,7 +92,7 @@ int main(int argc, char* argv[]){
                 /*
                     There it is, here we can get all info about roads
                 */
-                // printf("%s;%s;%d\n", city_origin, city_target, distance);
+                //printf("%s;%s;%d\n", city_origin, city_target, distance);
                 ////////////////////////////////////////////////////////////////////////////
 
                 //cleaning index, distance, city origin and city target
@@ -140,7 +141,7 @@ int main(int argc, char* argv[]){
                 distance = getDistanceFromBuffer(index, input_buffer);
 
                 //save origin city and distance in node
-                cout << "H( " << city_origin << " ) : " << distance << endl;
+                //cout << "H( " << city_origin << " ) : " << distance << endl;
                 auto it_first = nodes.find(city_origin);
                 it_first->second->straight_line_to_bucarest = distance;
 
@@ -148,8 +149,8 @@ int main(int argc, char* argv[]){
                 /*
                     There it is, here we can get all info about heuristics
                 */
-                // printf("%s ate %s sao %d\n", city_origin, city_target, distance);
-                // printf("%s;%d\n", city_origin, distance);
+                //printf("%s ate %s sao %d\n", city_origin, city_target, distance);
+                //printf("%s;%d\n", city_origin, distance);
                 ////////////////////////////////////////////////////////////////////////////
 
                 //cleaning index, distance and city origin
@@ -175,84 +176,139 @@ int main(int argc, char* argv[]){
 
     int node_g = 0 /*Gasto*/, node_h = 0; /*Heurística*/;
     int node_f = 0; // g + h -> Disntacia entre cidade origem e cidade alvo + distancia da cidade alvo até Bucareste
-    int smaller_f = 0; // Variável para salvar o menor f dentre os nós que foram abertos
+    int smaller_f = INT_MAX; // Variável para salvar o menor f dentre os nós que foram abertos
     bool isDestiny = false;
 
-    vector<pair<Node*, int /*node_f*/>> opened_nodes;
+    
+    map<string, pair<Node*, int /*G(x)*/>> opened_nodes;  // Ex: Arad : {Arad Node Object, F(Arad)}
     list<string> cities; // Salvar as cidades que podem ser visitadas a partir da cidade atual
 
-    auto it = nodes.find("Arad");
-    string city = "Arad"; it->second->visited = true; // Salvando Arad como a cidade de partida
+    // Salvando configurações iniciais de Arad
+    auto it_Arad = nodes.find("Arad");
+    string city = "Arad"; it_Arad->second->visited = true; // Salvando Arad como a cidade de partida
+    it_Arad->second->f_x = it_Arad->second->straight_line_to_bucarest; // Setando o F(x) de Arad que é igual a H(x)
+    opened_nodes["Arad"] = pair<Node*, int>(it_Arad->second, it_Arad->second->f_x); // Salvando Arad em opened_nodes
+
     string destiny = "Bucareste";
     string next_city;
 
+    while(!isDestiny){
 
-    //while(!isDestiny){
-
-        // Abrir todos os nós a partir da cidade atual
-        // Salvar todos os Nós abertos em uma vetor
-        // Percorrer esse vetor para checar qual nó possui o menor valor de f -> Esse nó será o próximo a ser visitado
         auto present_city = nodes.find(city);
         auto present_city_connections = present_city->second->conections;
+        smaller_f = INT_MAX;
 
-        cout << "Estou em " << city << " e posso ir para ";
-        for(auto it = present_city_connections.begin(); it != present_city_connections.end(); ++it){
+        // Printando as conexões da cidade atual
+        cout << "As conexoes de " << city << " sao: ";
+        for (auto it = present_city_connections.begin(); it != present_city_connections.end(); ++it){
             cout << it->first->name << " | ";
         }
 
         cout << endl;
 
+
+        // Adiconando as conexões da cidade atual em um map de nós abertos junto com o F(x) de cada uma das conexões
         for (auto it = present_city_connections.begin(); it != present_city_connections.end(); ++it){
+
+            //TO-DO: Acrescentar lógica de salvar o Nó anterior de cada Nó filho
+            it->first->previous_node = present_city->second->name;
             
-            // Calculando f para cada Nó aberto
-            node_f = it->second + it->first->straight_line_to_bucarest;
-            cout << "F( " << it->first->name << " ) : " << it->second << " + " << it->first->straight_line_to_bucarest << " = " << node_f << endl;
+            // Calculando G(x) e F(x) de cada Nó
+            it->first->g_x = it->second /*G(x)*/ + present_city->second->g_x /*G(x) do Nó anterior*/;
+            it->first->f_x /*F(x)*/ = it->first->g_x /*G(x)*/ + it->first->straight_line_to_bucarest /*H(x)*/;
+            cout << "F( " << it->first->name << " ) : " << it->first->g_x << " + " << it->first->straight_line_to_bucarest << " = " << it->first->f_x << endl;
 
-            // Salvando as conexoes da cidade atual que ainda náo foram visitadas em um vetor de Nós abertos
+            // Para cada Nó aberto será salvo seu nome junto com seu objeto e seu F(x)
             if(it->first->visited == false){
-                opened_nodes.push_back(make_pair(it->first, node_f));
+                opened_nodes.insert(pair<string, pair<Node*,int>>(it->first->name, pair<Node*, int>(it->first, it->first->f_x)));
             }
 
         }
 
+        cout << "Estou em " << city << " e posso ir para :" << endl /*Todos os nós que estão em opened_nodes que ainda não foram visitados*/;
 
+        for (auto it = opened_nodes.begin(); it != opened_nodes.end(); ++it){
+            if(it->second.first->visited == false) { cout << it->second.first->name /*Nome do Nó*/ << " com F(x) = " << it->second.first->f_x << endl; }
+        }
 
+        cout << endl;
         
-        // Percorrer o vetor de nós abertos e checar qual o Nó com menor f -> Esse será o próximo Nó a ser visitado
-        smaller_f = opened_nodes[0].second;
-        for (int i = 1; i < opened_nodes.size(); i++){
+        // Percorrer o map opened_nodes e checar qual o Nó com menor F(x) -> Esse será o próximo Nó a ser visitado
+        for (auto it = opened_nodes.begin(); it != opened_nodes.end(); ++it){
 
-            if(opened_nodes[i].second < smaller_f && !(opened_nodes[i].first->visited)){
+            if((it->second.first->f_x < smaller_f) && (it->second.first->visited == false)){
 
-                smaller_f = opened_nodes[i].second;
+                smaller_f = it->second.first->f_x;
 
-                // Salvando o nome do Nó com menor f
-                city = opened_nodes[i].first->name;
+                // Salvando o nome do Nó com menor F(x)
+                city = it->first;
 
             }
 
         }
+
+        // Printando o próximo Nó a ser visitado -> O Nó com menor F(x) dentre os nós abertos
+        cout << "Escolhi ir para " << city << " com F(x) = " << smaller_f << endl;
+        //cout << "\n" << "\n";
 
         // Agora já sabemos qual Nó será o próximo Nó a ser visitado -> Logo, marcamos esse Nó como visitado
-        auto next_node = nodes.find(city);
-        next_node->second->visited = true;
+        auto next_node = opened_nodes.find(city);
+        next_node->second.first->visited = true;
 
-        cout << "Escolhi ir para " << city << " com F(x) = " << smaller_f << endl;
+        // Testa se eu cheguei em Bucareste
+        if(city == "Bucareste"){
 
-        // Somar o custo para chegar no nó com a heurística do nó (Comparar essa soma entre todos os nós)
-        // Andar para o nó com menor custo f
-        // Checar se chegamos no destino
-    //}
+            isDestiny = true;
+
+            // TO-DO: Arrumar estrutura de dados que irá salvar o caminho ótimo
+            // Percorro todos os Nós visitados para montar o caminho mais rápido para ser printado
+            bool complete_way = false;
+            auto city_it = opened_nodes.find("Bucareste");
+            stack<string> fastest_way;
+            fastest_way.push(city); // Adicionando bucareste na pilha
+
+            while(complete_way == false){
+
+                string previous_node = city_it->second.first->previous_node;
+                fastest_way.push(previous_node);
+                city_it = opened_nodes.find(previous_node);
+
+                if(city_it->first == "Arad"){
+                    complete_way = true;
+                }
+                
+            }
+
+            // Printando o caminho ótimo
+            cout << "O melhor caminho para chegar em Bucareste: ";
+            while (!fastest_way.empty()){
+                cout << fastest_way.top() << " | ";
+                fastest_way.pop();
+            }
+
+            cout << endl;
+
+        }
+
+        // O fato de sempre escolher o Nó com o menor F(x) dentre os Nós abertos para ser o próximo Nó visitado, garante que
+        // se eu eventualmente chegar em Bucareste eu vou chegar pelo melhor caminho possível (Caminho Ótimo)
+
+        // Revisar se o map opened_nodes precisa realmente do pair uma vez que F(x) está sendo salvo como atributo do objeto Node
+        // Revisar se estamos usando estruturas de dados a mais do que o necessário
+
+    }
 
 
-    cout << "Fim do teste!!!" << endl;
-
+    // Deletando os nós para liberar o espaço alocado na memória
+    for(auto it = nodes.begin(); it != nodes.end(); ++it){
+        deleteNode(it->second);
+    }
 
     return 0;
 
 }
 
-void fillCityWithBuffer(char *city, char *buffer){
+void fillCityWithBuffer(char *city, char *buffer){ // Can be 
         //variables
         int index = 0;
 
@@ -285,4 +341,8 @@ int getDistanceFromBuffer(int index, char *buffer){
     //cleaning buffer
     sprintf(buffer, "______________\0");
     return distance;
+}
+
+void deleteNode(Node* node){
+    delete node;
 }
