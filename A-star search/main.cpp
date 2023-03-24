@@ -1,3 +1,6 @@
+// Nomes: Pedro Santos Oliveira e Vinícius Nascimento
+// Tarefa 1 - Busca A*
+
 #include <bits/stdc++.h>
 #include <iostream>
 #include <stdlib.h>
