@@ -1,0 +1,83 @@
+# sciFLT scilab Fuzzy Logic Toolbox
+<REVISION>
+ <revision>@REV@
+
+<DESCRIPTION>
+ <name>Sistema de Frenagem
+ <comment>Pedro Santos Vinicius Nascimento
+ <type>m
+ <SNorm>max
+ <SNormPar>0
+ <TNorm>min
+ <TNormPar>0
+ <Comp>yager
+ <CompPar>0
+ <ImpMethod>min
+ <AggMethod>max
+ <defuzzMethod>centroide
+
+<INPUT>
+ <name>Velocidade
+ <range>0 200
+  <mf_name>Muito Baixa
+   <mf_type>trimf
+   <mf_par>-50.0 0.0 50.0
+  <mf_name>Baixa
+   <mf_type>trimf
+   <mf_par>0.0 50.0 100.0
+  <mf_name>Média
+   <mf_type>trimf
+   <mf_par>50.0 100.0 150.0
+  <mf_name>Alta
+   <mf_type>trimf
+   <mf_par>100.0 150.0 200.0
+  <mf_name>Muito Alta
+   <mf_type>trimf
+   <mf_par>150.0  200.0 250.0
+
+ <name>Distância
+ <range>0 200
+  <mf_name>Muito Baixa
+   <mf_type>trimf
+   <mf_par>-50.0 0.0 50.0
+  <mf_name>Baixa
+   <mf_type>trimf
+   <mf_par>0.0 50.0 100.0
+  <mf_name>Média
+   <mf_type>trimf
+   <mf_par>50.0 100.0 150.0
+  <mf_name>Alta
+   <mf_type>trimf
+   <mf_par>100.0 150.0 200.0
+  <mf_name>Muito Alta
+   <mf_type>trimf
+   <mf_par>150.0 200.0 250.0
+
+<OUTPUT>
+ <name>Frenagem
+ <range>0 100
+  <mf_name>Muito Baixa
+   <mf_type>trimf
+   <mf_par>-20.0 0.0 20.0
+  <mf_name>Baixa
+   <mf_type>trimf
+   <mf_par>0.0 20.0 40.0
+  <mf_name>Média
+   <mf_type>trimf
+   <mf_par>20.0 40.0 60.0
+  <mf_name>Alta
+   <mf_type>trimf
+   <mf_par>40.0 60.0 80.0
+  <mf_name>Muito Alta
+   <mf_type>trimf
+   <mf_par>60.0 100.0 120.0
+
+<RULE>
+1 1 3 1 1.0
+1 2 2 1 1.0
+1 3 2 1 1.0
+1 4 1 1 1.0
+1 5 1 1 1.0
+2 1 4 1 1.0
+2 2 3 1 1.0
+
