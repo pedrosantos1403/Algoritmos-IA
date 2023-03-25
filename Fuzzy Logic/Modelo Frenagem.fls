@@ -10,7 +10,7 @@
  <SNormPar>0
  <TNorm>min
  <TNormPar>0
- <Comp>yager
+ <Comp>one
  <CompPar>0
  <ImpMethod>min
  <AggMethod>max
@@ -33,7 +33,7 @@
    <mf_par>100.0 150.0 200.0
   <mf_name>Muito Alta
    <mf_type>trimf
-   <mf_par>150.0  200.0 250.0
+   <mf_par>150.0 200.0 250.0
 
  <name>Distância
  <range>0 200
@@ -58,26 +58,44 @@
  <range>0 100
   <mf_name>Muito Baixa
    <mf_type>trimf
-   <mf_par>-20.0 0.0 20.0
+   <mf_par>-25.0 0.0 25.0
   <mf_name>Baixa
    <mf_type>trimf
-   <mf_par>0.0 20.0 40.0
+   <mf_par>0.0 25.0 50.0
   <mf_name>Média
    <mf_type>trimf
-   <mf_par>20.0 40.0 60.0
+   <mf_par>25.0 50.0 75.0
   <mf_name>Alta
    <mf_type>trimf
-   <mf_par>40.0 60.0 80.0
+   <mf_par>50.0 75.0 100.0
   <mf_name>Muito Alta
    <mf_type>trimf
-   <mf_par>60.0 100.0 120.0
+   <mf_par>75.0 100.0 125.0
 
 <RULE>
 1 1 3 1 1.0
 1 2 2 1 1.0
-1 3 2 1 1.0
+1 3 1 1 1.0
 1 4 1 1 1.0
 1 5 1 1 1.0
 2 1 4 1 1.0
 2 2 3 1 1.0
+2 3 2 1 1.0
+2 4 1 1 1.0
+2 5 1 1 1.0
+3 1 5 1 1.0
+3 2 4 1 1.0
+3 3 3 1 1.0
+3 4 2 1 1.0
+3 5 1 1 1.0
+4 1 5 1 1.0
+4 2 5 1 1.0
+4 3 4 1 1.0
+4 4 3 1 1.0
+4 5 2 1 1.0
+5 1 5 1 1.0
+5 2 5 1 1.0
+5 3 5 1 1.0
+5 4 4 1 1.0
+5 5 3 1 1.0
 

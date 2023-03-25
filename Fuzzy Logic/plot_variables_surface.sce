@@ -12,7 +12,3 @@ plotvar(fls,"output",1);
 
 figure(3);
 plotsurf(fls,[1 2], 1);
-
- 
- 
-

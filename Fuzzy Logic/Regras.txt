@@ -1,0 +1,29 @@
+Vel #Muito Baixa - Dis _Muito Baixa - Fren %Média       |||
+Vel #Muito Baixa - Dis _Baixa - Fren %Baixa             ||
+Vel #Muito Baixa - Dis _Média - Fren %Muito baixa       |
+Vel #Muito Baixa - Dis _Alta - Fren %Muito baixa        |
+Vel #Muito Baixa - Dis _Muito Alta - Fren %Muito baixa  |
+
+Vel #Baixa - Dis _Muito Baixa - Fren %Alta              ||||
+Vel #Baixa - Dis _Baixa - Fren %Média                   |||
+Vel #Baixa - Dis _Média - Fren %Baixa                   ||
+Vel #Baixa - Dis _Alta - Fren %Muito Baixa              |
+Vel #Baixa - Dis _Muito Alta - Fren %Muito Baixa        |
+
+Vel #Média - Dis _Muito Baixa - Fren %Muito Alta        |||||
+Vel #Média - Dis _Baixa - Fren %Alta                    ||||
+Vel #Média - Dis _Média - Fren %Média                   |||
+Vel #Média - Dis _Alta - Fren %Baixa                    ||
+Vel #Média - Dis _Muito Alta - Fren %Muito Baixa        |
+
+Vel #Alta - Dis _Muito Baixa - Fren %Muito Alta         |||||
+Vel #Alta - Dis _Baixa - Fren %Muito Alta               |||||
+Vel #Alta - Dis _Média - Fren %Alta                     ||||
+Vel #Alta - Dis _Alta - Fren %Média                     |||
+Vel #Alta - Dis _Muito Alta - Fren %Baixa               ||
+
+Vel #Muito Alta - Dis _Muito Baixa - Fren %Muito Alta   |||||
+Vel #Muito Alta - Dis _Baixa - Fren %Muito Alta         |||||
+Vel #Muito Alta - Dis _Média - Fren %Muito Alta         |||||
+Vel #Muito Alta - Dis _Alta - Fren %Alta                ||||
+Vel #Muito Alta - Dis _Muito Alta - Fren %Média         |||

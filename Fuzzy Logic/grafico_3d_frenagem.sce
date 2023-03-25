@@ -1,7 +1,7 @@
 clc;
 close;
 
-fls=loadfls('carro2'); //carrega o arquivo carro2.fls diretamente no workspace para a variável chamada 'fls'
+fls=loadfls('Modelo Frenagem'); //carrega o arquivo carro2.fls diretamente no workspace para a variável chamada 'fls'
 
 figure(1);
 plotvar(fls,"input",[1 2]); 
