@@ -1,5 +1,4 @@
-%sciFLTEditor
-%editfls
+fls=loadfls('Modelo Frenagem'); //carrega o arquivo carro2.fls diretamente no workspace para a variável chamada 'fls'
 
 clc;
 close;
