@@ -1,14 +1,14 @@
-Iris-setosa = (001)
-Iris-versicolor = 010 
-Iris-virginica = 100
+// Iris-setosa = (001)
+// Iris-versicolor = 010 
+// Iris-virginica = 100
 
 a base de dados 150 plantas sendo:
 	|_ 50 Iris-setosa 
 	|_ 50 Iris-versicolor 
 	|_ 50 Iris-virginica 
 
-a => taxa de aprendizagem
-a = 0.1 
+// a => taxa de aprendizagem
+// a = 0.1 
 
 dn é o valor desejado para o neurônio n
 	dn = tabelado
