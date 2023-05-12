@@ -14,8 +14,8 @@ a base de dados 150 plantas sendo:
 // 	dn = tabelado
 // zn é o erro observado para a diferença do valor desejado para o encontrado naquele neurônio n
 // 	zn = dn - yn
-E é o erro quadrático da época, deve ser plotado
-bn é o bias associado ao neurônio n
+// E é o erro quadrático da época, deve ser plotado
+// bn é o bias associado ao neurônio n
 
 wnm => peso associado ao neurônio n, para entrada m, sendo n = {1,2,3} e m = {1,2,3,4}
 	xm => entrada m = {1,2,3,4}
@@ -70,14 +70,15 @@ while(qtde_rodar > 0):
 
 		E = E + (zn*(zn)^T)
 
+	// plotar epoca
 
 	// classificar todas as 45 plantas de teste
-		encontrar a quantidade de acertos
+	encontrar a quantidade de acertos
 
 
 
 	// calcular taxa de acerto
-		taxa_de_acerto = acertos/(acertos+erros)
+	taxa_de_acerto = acertos/(acertos+erros)
 
 
 

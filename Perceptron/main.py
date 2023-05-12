@@ -19,10 +19,15 @@ def main():
     z = []
 
     # Epoch error
-    E = 0
+    E_current = 0
+    E_past = 1
 
     # bias for all neurons
     b = [random.random() for x in range(NEURON_MAX_NUMBER)]
+
+    while E_past > E_current: #after set train base
+        pass
+        
 
 if __name__ == '__main__':
     main()
