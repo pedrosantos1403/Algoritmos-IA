@@ -30,26 +30,30 @@ E = 0
 funcão de ativação escolhida = {degrau, sigmoid}
 qtde_rodar = não se sabe valor a priori, tem que acompanhar a queda do E
 
-while(qtde_rodar > 0):
-	//definir base de teste
-	a base de treino consiste em 105 plantas sendo
-			|_ 35 Iris-setosa
-			|_ 35 Iris-versicolor
-			|_ 35 Iris-virginica
-			= Isso para que o modelo não se ajuste a apenas 1 tipo de plantas
+//definir base de teste
+a base de treino consiste em 105 plantas sendo
+		|_ 35 Iris-setosa
+		|_ 35 Iris-versicolor
+		|_ 35 Iris-virginica
+		= Isso para que o modelo não se ajuste a apenas 1 tipo de plantas
 
-	//definir base de treino
-	a base de teste consiste em 45 pantas sendo:
-		|_ 15 Iris-setosa
-		|_ 15 Iris-versicolor
-		|_ 15 Iris-virginica
+//definir base de treino
+a base de teste consiste em 45 pantas sendo:
+	|_ 15 Iris-setosa
+	|_ 15 Iris-versicolor
+	|_ 15 Iris-virginica
+
+// wnm = valores aleatórios entre -1 e 1
+// bn = valores aleatórios entre -1 e 1
+
+while(qtde_rodar > 0):
+	
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////
 
 
-	wnm = valores aleatórios entre -1 e 1
-	bn = valores aleatórios entre -1 e 1
+	
 	//degrau
 	while (percorrer todas entradas de treino 1 vez):
 

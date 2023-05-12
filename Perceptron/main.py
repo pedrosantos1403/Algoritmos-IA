@@ -1,4 +1,5 @@
 import random
+from classes import Matrix
 
 # defines
 SETOSA = '001'
@@ -24,6 +25,13 @@ def main():
 
     # bias for all neurons
     b = [random.random() for x in range(NEURON_MAX_NUMBER)]
+
+    # weights
+    w = Matrix()
+    for i in range(NEURON_MAX_NUMBER):
+        w.insert_row([random.random() for x in range(NEURON_MAX_NUMBER)])
+    
+    
 
     while E_past > E_current: #after set train base
         pass
