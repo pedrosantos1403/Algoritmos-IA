@@ -10,10 +10,10 @@ a base de dados 150 plantas sendo:
 // a => taxa de aprendizagem
 // a = 0.1 
 
-dn é o valor desejado para o neurônio n
-	dn = tabelado
-zn é o erro observado para a diferença do valor desejado para o encontrado naquele neurônio n
-	zn = dn - yn
+// dn é o valor desejado para o neurônio n
+// 	dn = tabelado
+// zn é o erro observado para a diferença do valor desejado para o encontrado naquele neurônio n
+// 	zn = dn - yn
 E é o erro quadrático da época, deve ser plotado
 bn é o bias associado ao neurônio n
 
