@@ -1,3 +1,5 @@
+import random
+
 # defines
 SETOSA = '001'
 VERSICOLOR = '010'
@@ -18,6 +20,9 @@ def main():
 
     # Epoch error
     E = 0
-    
+
+    # bias for all neurons
+    b = [random.random() for x in range(NEURON_MAX_NUMBER)]
+
 if __name__ == '__main__':
     main()
