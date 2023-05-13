@@ -14,8 +14,6 @@ NEURON_MAX_NUMBER = 3
 # sepal_length, sepal_width, petal_length, petal_width
 PROPERTIES_MAX_NUMBER = 4 
 
-def 
-
 def main():
     io_base = pd.DataFrame(pd.read_csv('Iris_Data.csv'))
     
