@@ -1,3 +1,4 @@
+from math import exp
 import random
 import pandas as pd
 from classes import Matrix
@@ -13,6 +14,30 @@ NEURON_MAX_NUMBER = 3
 
 # sepal_length, sepal_width, petal_length, petal_width
 PROPERTIES_MAX_NUMBER = 4 
+
+def step_function(wn:list, x:list) -> int:
+    f = 0   
+    for property_index in range(len(wn)):
+        f += wn[property_index]*x[property_index]
+    if f <= 0:
+        return 0
+    else:
+        return 1
+
+def sigmoid_function(wn:list, x:list) -> float:
+    f = 0
+    for property_index in range(w.get_size_columns()):
+        f += wn[property_index]*x[property_index]
+    return 1/(1+exp(-f))
+
+def sigmoid_output_handler(y:list) -> list:
+    greater = max(y)
+    for i in range(len(y)):
+        if y[i] == greater:
+            y[i] = 1
+        else:
+            y[i] = 0
+    return y
 
 def main():
     io_base = pd.DataFrame(pd.read_csv('Iris_Data.csv'))

@@ -84,11 +84,8 @@ while(qtde_rodar > 0):
 	// calcular taxa de acerto
 	taxa_de_acerto = acertos/(acertos+erros)
 
-
-
-
-	wnm = valores aleatórios entre -1 e 1
-	bn = valores aleatórios entre -1 e 1
+	// wnm = valores aleatórios entre -1 e 1
+	// bn = valores aleatórios entre -1 e 1
 	//sigmoid
 	while (percorrer todas entradas de treino 1 vez):
 
