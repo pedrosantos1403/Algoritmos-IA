@@ -57,29 +57,27 @@ while(qtde_rodar > 0):
 	//degrau
 	while (percorrer todas entradas de treino 1 vez):
 
-		y1 = f1 ? 1 : 0
-			|_ f1 = w11*x1 + w12*x2 + w13*x3 + w14*x4 + bn
+		// y1 = f1 ? 1 : 0
+		// 	|_ f1 = w11*x1 + w12*x2 + w13*x3 + w14*x4 + bn
 
-		y2 = f2 ? 1 : 0
-			|_ f2 = w21*x1 + w22*x2 + w23*x3 + w24*x4 + bn
+		// y2 = f2 ? 1 : 0
+		// 	|_ f2 = w21*x1 + w22*x2 + w23*x3 + w24*x4 + bn
 
-		y3 = f3 ? 1 : 0
-			|_ f3 = w31*x1 + w32*x2 + w33*x3 + w34*x4 + bn
+		// y3 = f3 ? 1 : 0
+		// 	|_ f3 = w31*x1 + w32*x2 + w33*x3 + w34*x4 + bn
 
-		zn = dn - yn
+		// zn = dn - yn
 
-		wnm = wnm + a*zn*(xm)^T
+		// wnm = wnm + a*zn*(xm)^T
 
-		bn = bn + a*zn
+		// bn = bn + a*zn
 
-		E = E + (zn*(zn)^T)
+		// En = En + (zn*(zn)^T)
 
 	// plotar epoca
 
 	// classificar todas as 45 plantas de teste
 	encontrar a quantidade de acertos
-
-
 
 	// calcular taxa de acerto
 	taxa_de_acerto = acertos/(acertos+erros)
@@ -101,18 +99,18 @@ while(qtde_rodar > 0):
 			|_ f3 = w31*x1 + w32*x2 + w33*x3 + w34*x4 + bn
 			|_ a maior estatística precisa ser convertida em 1 e as demais devem ir para 0
 
-		zn = dtn - ytn
-			|_ dtn é o valor desejado para aquele tipo t e para o neurônio n
+		zn = dn - yn
 
 		wnm = wnm + a*zn*(xm)^T
 
-		bn = bn + a*zn 
+		bn = bn + a*zn
 
-		E = E + (zn*(zn)^T)
+		En = En + (zn*(zn)^T)
 
+	// plotar epoca
+	
 	// classificar todas as 45 plantas de teste
-		encontrar a quantidade de acertos
-
+	encontrar a quantidade de acertos
 
 	// calcular taxa de acerto
-		taxa_de_acerto = acertos/(acertos+erros)
+	taxa_de_acerto = acertos/(acertos+erros)
