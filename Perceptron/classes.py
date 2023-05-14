@@ -59,6 +59,9 @@ class Matrix:
         for r in range(self.rows):
             self.items[r][c] = K[r]
 
+    def set_item(self, r:int, c:int, value:float) -> None:
+        self.items[r][c] = value
+
 class Vector:
     def __init__(self, data=0) -> None:
         self.rows = 0

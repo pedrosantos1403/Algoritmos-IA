@@ -28,7 +28,7 @@ def step_function(wn:list, x:list, b:float) -> int:
 
 def sigmoid_function(wn:list, x:list, b:float) -> float:
     f = 0
-    for property_index in range(w.get_size_columns()):
+    for property_index in range(len(wn)):
         f += wn[property_index]*x[property_index]
     f += b
     return 1/(1+exp(-f))
@@ -83,6 +83,7 @@ def main():
 
     ######################################################################################
     # step function
+    print('step function')
 
     # Epoch error per neuron
     E_current = [0 for x in range(NEURON_MAX_NUMBER)]
@@ -172,6 +173,112 @@ def main():
         y = []
         for i in range(w.get_size_rows()):
             y.append(step_function(w.get_row(i),x,b[i]))
+
+        if y == d:
+            # acertoh miseravi
+            hit += 1
+
+    # calculate hit rate
+    miss = len(training_base) - hit
+    hit_rate = hit/(hit+miss)
+    print(hit_rate)
+
+    ######################################################################################
+    print('######################################################################################')
+    ######################################################################################
+    # sigmoid function
+    print('sigmoid function')
+
+    # Epoch error per neuron
+    E_current = [0 for x in range(NEURON_MAX_NUMBER)]
+    E_past = [1 for x in range(NEURON_MAX_NUMBER)]
+    E_history = []
+
+    # bias for all neurons
+    b = [random.random() for x in range(len(PROPERTIES))]
+
+    # weights
+    for i in range(w.get_size_rows()):
+        for j in range(w.get_size_columns()):
+            w.set_item(i,j,random.random())
+    
+    min_interactions = 2
+    while E_past[0] > E_current[0] or E_past[1] > E_current[1] or E_past[2] > E_current[2] or min_interactions: #after set train base
+        # set a seed vetor for random access
+        index_vector = [x for x in range(len(training_base))]
+
+        while len(index_vector) > 0:
+            rand_index = get_random_index(index_vector)
+            row = training_base.iloc[rand_index]
+
+            # find d
+            for key in species.keys():
+                if row.loc['species'] == key:
+                    d = species[key]
+
+            # recover input
+            x = []
+            for property in PROPERTIES:
+                x.append(row.loc[property])
+            
+            # calculate y
+            y = []
+            for i in range(w.get_size_rows()):
+                y.append(sigmoid_function(w.get_row(i),x,b[i]))
+            sigmoid_output_handler(y)
+
+            # find error z = d - y
+            z = numpy.subtract(d,y)
+
+            # find new weights, bias and E's
+            for i in range(w.get_size_rows()):
+                # wnm = wnm + a*zn*(xm)^T
+                wi = w.get_row(i)
+                wi = numpy.add(wi, numpy.multiply(ALFA*z[i],x))
+                w.set_row(i, wi)
+
+                # bn = bn + a*zn
+                b[i] = b[i] + ALFA*z[i]
+
+        # find epoch error after training
+        for i in range(w.get_size_rows()):
+            # En = En + (zn*(zn)^T)
+            E_past[i] = E_current[i]
+            E_current[i] = E_past[i] + z[i]*z[i]
+        
+        # epoch register
+        E_history.append(E_current)
+
+        # min_interactions beat down
+        min_interactions -= 1
+    
+    # print epoch
+    
+    # test step model
+    # set a seed vetor for random access
+    index_vector = [x for x in range(len(training_base))]
+
+    # test
+    hit = 0
+    while len(index_vector) > 0:
+        rand_index = get_random_index(index_vector)
+        row = training_base.iloc[rand_index]
+
+        # find d
+        for key in species.keys():
+            if row.loc['species'] == key:
+                d = species[key]
+
+        # recover input
+        x = []
+        for property in PROPERTIES:
+            x.append(row.loc[property])
+        
+        # calculate y
+        y = []
+        for i in range(w.get_size_rows()):
+            y.append(sigmoid_function(w.get_row(i),x,b[i]))
+        sigmoid_output_handler(y)
 
         if y == d:
             # acertoh miseravi
