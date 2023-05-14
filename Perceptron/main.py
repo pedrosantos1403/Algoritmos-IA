@@ -3,6 +3,8 @@ import numpy
 import random
 import pandas as pd
 from classes import Matrix
+# import matplotlib.pyplot as plt   # better go to jupyter now
+# import seaborn as sns
 
 # learning rate
 ALFA = 0.1
@@ -147,8 +149,6 @@ def main():
         # min_interactions beat down
         min_interactions -= 1
     
-    # print epoch
-    
     # test step model
     # set a seed vetor for random access
     index_vector = [x for x in range(len(training_base))]
@@ -181,8 +181,10 @@ def main():
     # calculate hit rate
     miss = len(training_base) - hit
     hit_rate = hit/(hit+miss)
-    print(hit_rate)
+    print('hit_rate: {:.2f}'.format(hit_rate*100))
 
+    ######################################################################################
+    # step epoch graph
     ######################################################################################
     print('######################################################################################')
     ######################################################################################
@@ -252,8 +254,6 @@ def main():
         # min_interactions beat down
         min_interactions -= 1
     
-    # print epoch
-    
     # test step model
     # set a seed vetor for random access
     index_vector = [x for x in range(len(training_base))]
@@ -287,9 +287,10 @@ def main():
     # calculate hit rate
     miss = len(training_base) - hit
     hit_rate = hit/(hit+miss)
-    print(hit_rate)
+    print('hit_rate: {:.2f}'.format(hit_rate*100))
 
     ######################################################################################
-
+    # sigmoid epoch graph
+    ######################################################################################
 if __name__ == '__main__':
     main()
