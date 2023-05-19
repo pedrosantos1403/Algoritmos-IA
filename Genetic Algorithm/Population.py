@@ -2,37 +2,43 @@ import random
 import math
 import numpy as np
 
-best=-100000
+populations = []
+best = -10000
 
-populations =([[random.uniform(0,10) for x in range(2)] for i in range(100)])
-#print(len(populations))
-#print(type(populations))
-#print(populations)
+# Function to create the initial population
+def populating():
+    global populations
+    populations = ([[random.uniform(0,10) for x in range(2)] for i in range(100)])
+    #print(len(populations))
+    #print(populations)
 
-parents=[]
-new_populations = []
-
+# F(X)
 def f_X(x1,x2):
     return math.sqrt(x1) * math.sin(x1) * math.sqrt(x2) * math.sin(x2) + 10
 
-
+# Fitness Function
 def fitness_score() :
-    global populations,best
+    global populations
+    global best
     fit_value = []
-    fit_score=[]
 
+    # Calculating the fitness for each individual
     for i in range(100) :
         chromosome_value = f_X(populations[i][0], populations[i][1])
-        fit_value.append(chromosome_value) # Calculo da função com os valores dos genes
+        fit_value.append(chromosome_value)
 
-    print(fit_value)
-    fit_value = fit_value.sort(reverse = True) # Ordenando os indivíduos em relação ao fit value
-    best= fit_value[0]
+    # Sorting the fit values to get the best individual
+    fit_value.sort(reverse = True)
+    best = fit_value[0]
+
+    print(len(fit_value))
+    print(best) # Lembrar que o valor está sendo printado somando +10
+
     
-#fitness_score()
 
 def main():
-    pass
+    populating()
+    fitness_score()
 
 if __name__ == "__main__":
     main()
