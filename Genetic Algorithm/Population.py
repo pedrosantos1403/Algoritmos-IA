@@ -4,6 +4,7 @@ import numpy as np
 
 populations = []
 best = -10000
+parents = []
 
 # Function to create the initial population
 def populating():
@@ -31,14 +32,22 @@ def fitness_score() :
     fit_value.sort(reverse = True)
     best = fit_value[0]
 
-    print(len(fit_value))
-    print(best) # Lembrar que o valor está sendo printado somando +10
+    #print(len(fit_value))
+    #print(best)  Lembrar que o valor está sendo printado somando +10
 
-    
+# Function to select the parents
+def selectparents():
+    global parents
+    global populations
+
+    parents = populations[0:2]
+    print(parents)
+
 
 def main():
     populating()
     fitness_score()
+    selectparents()
 
 if __name__ == "__main__":
     main()
