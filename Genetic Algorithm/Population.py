@@ -2,18 +2,13 @@ import random
 import math
 import numpy as np
 import statistics as st
+import matplotlib.pyplot as plt
 
-# TO-DO
-# Change SIZE_POPULATION to 100
-# Change the logic to select parents -> Sometimes the same parent is selected in sequence causing the crossover to be with itself
+SIZE_POPULATION = 50
 
-SIZE_POPULATION = 100
-
-# Taxas
 taxa_crossover = 0.2
 taxa_mutacao = 0.2
 
-# Variáveis
 populations = []
 new_population = []
 best_individuals = [] # Saves best individual of each popultion
@@ -31,7 +26,7 @@ def populating():
 def f_X(x1,x2):
     return math.sqrt(x1) * math.sin(x1) * math.sqrt(x2) * math.sin(x2) + 10
 
-def fitness_score() :
+def fitness_score():
     global populations, new_population
     global fit_value, fit_add, fit_parents, fit_value_sorted, best_individuals, mean_individuals
 
@@ -53,12 +48,6 @@ def fitness_score() :
     # Saving the mean value of the population
     mean_individuals.append(st.mean(fit_value))
 
-    #print("Vetor fitness: ")
-    #print(fit_value)
-
-    #print("Vetor fitness sorted: ")
-    #print(fit_value_sorted)
-
     # Building the sum vector
     for i in range(SIZE_POPULATION):
         if i == 0:
@@ -68,7 +57,7 @@ def fitness_score() :
 
     # Building the vector of selected parents
     for i in range(SIZE_POPULATION):
-        fit_parent_number = random.uniform(0, fit_add[SIZE_POPULATION-1])
+        fit_parent_number = random.randint(0, math.floor(fit_add[-1]))
 
         for j in range(SIZE_POPULATION):
             if fit_parent_number < fit_add[j]:
@@ -77,7 +66,7 @@ def fitness_score() :
 
 def crossover(p1:list , p2:list):
 
-    if random.uniform(0,1) < taxa_crossover:
+    if random.uniform(0,1) > taxa_crossover:
         return p1, p2
     
     else:
@@ -117,13 +106,12 @@ def mutation():
 def main():
 
     global populations, new_population
-    global best_individuals, worst_individuals
+    global best_individuals, worst_individuals, fit_parents
 
     # Creating the initial population
     populating()
 
-    # Iterating through 100 epochs
-    for j in range (100):
+    for j in range (30):
 
          # Applying the fitness function
         fitness_score()
@@ -132,16 +120,10 @@ def main():
         for i in range(0, SIZE_POPULATION - 1, 2):
             new_population.append([])
             new_population.append([])
-            new_population[i], new_population[i+1] = crossover(populations[i], populations[i+1])
-
-        #print("Nova populacao crossover: ")
-        #print(new_population)
+            new_population[i], new_population[i+1] = crossover(populations[fit_parents[i]], populations[fit_parents[i+1]])
 
         # Applying mutation in the new population
         mutation()
-
-        #print("Nova populacao mutation: ")
-        #print(new_population)
 
         # Adjusting Variables
         populations.clear()
@@ -152,15 +134,16 @@ def main():
         fit_value.clear()
         fit_value_sorted.clear()
 
-    #print("Best individuals: ")
-    #print(best_individuals)
+    # Ploting graph
+    plt.plot(best_individuals)
+    plt.plot(worst_individuals)
+    plt.plot(mean_individuals)
 
-    #print("Worst individuals: ")
-    #print(worst_individuals)
 
-    print("Melhor valor final: ", best_individuals[-1])
-    print("Pior valor final: ", worst_individuals[-1])
-
+    # Cleaning vectors
+    best_individuals.clear()
+    worst_individuals.clear()
+    mean_individuals.clear()
 
 if __name__ == "__main__":
     main()
