@@ -4,10 +4,10 @@ import numpy as np
 import statistics as st
 import matplotlib.pyplot as plt
 
-SIZE_POPULATION = 50
+SIZE_POPULATION = 100
 
-taxa_crossover = 0.2
-taxa_mutacao = 0.2
+taxa_crossover = 0.45
+taxa_mutacao = 0.02
 
 populations = []
 new_population = []
