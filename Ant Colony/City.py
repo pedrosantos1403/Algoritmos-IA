@@ -1,8 +1,8 @@
 class City:
-    def __init__(self, id, x, y):
-        self.id = int(id)
-        self.x = float(x)
-        self.y = float(y)
+    def __init__(self, id:int, x:float, y:float):
+        self.id = id
+        self.x = x
+        self.y = y
     
     def get_id(self):
         return self.id

@@ -1,5 +1,5 @@
 class Ridge:
-    def __init__(self, city_origin, city_destiny, pheromone, heuristic):
+    def __init__(self, city_origin:int, city_destiny:int, pheromone:float, heuristic:float):
         self.city_origin = city_origin
         self.city_destiny = city_destiny
         self.pheromone = pheromone
