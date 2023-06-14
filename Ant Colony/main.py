@@ -24,18 +24,15 @@ def build_cities():
             y = float(y)
             cities_array.append(City(id, x, y))
 
-
 # Construindo o vetor de formigas, cada formiga começa em uma cidade diferente
 def build_ants_initial_position() -> list:
     global ants, cities_array
     for i in cities_array:
         ants.append([i])
 
-
 # Cálculo da distância entre duas cidades usando função euclidiana
 def distance(x1:float,x2:float,y1:float,y2:float) -> float:
     return math.sqrt((x1-x2)**2 + (y1-y2)**2)
-
 
 # Criando uma matriz de arestas para salvar todas as distâncias entre todas as cidades
 def build_ridges():
@@ -48,14 +45,12 @@ def build_ridges():
             else:
                 ridges[i][j] = Ridge(i, j, 1, 0)
 
-
 # Calcular a probabilidade de cada formiga ir para cada cidade
 def propability(possible_cities:list, ant_cities:list):
 
     # Criar uma lista de pheromones para calcular o somatório
     global alpha, beta
     return ((pheromone)**alpha) * ((heuristic)**beta) / sum
-
 
 # Calcular a próxima cidade a ser visitada por cada formiga
 def next_city():
@@ -73,12 +68,6 @@ def next_city():
         # for i in range(len(possible_cities)):
         #     print(possible_cities[i].get_id(), end=" ")
         # print("\n")
-
-
-
-
-        
-
 
 def main():
 
@@ -115,39 +104,6 @@ def main():
     # print(ridges[30][14])
 
     #next_city()
-
-
-if __name__ == "__main__":
-    main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 if __name__ == "__main__":
     main()
