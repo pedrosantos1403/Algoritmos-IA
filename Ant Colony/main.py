@@ -29,7 +29,7 @@ def build_cities():
 def build_ants_initial_position() -> list:
     global ants, cities_array
     for i in cities_array:
-        ants.append([i.get_id()])
+        ants.append([i])
 
 
 # Cálculo da distância entre duas cidades usando função euclidiana
@@ -87,14 +87,26 @@ def main():
     # Limpando as variáveis
     cities_array.clear(), ants.clear()
 
+    # Checando o conteúdo das variáveis
+    print("hello")
+    #print(ants)
+    #print(ridges)
+
     # Construindo o vetor de cidades
-    build_cities()
+    # build_cities()
 
-    # Construindo o vetor de formigas
-    build_ants_initial_position()
+    # DEBUG
+    #for i in range(len(cities_array)):
+     #   print(cities_array[i])
 
-    # Construindo a matriz de arestas
-    build_ridges()
+    #build_ants_initial_position()
+
+    # DEBUG
+    # for i in range(len(ants)):
+    #     for j in range(len(ants[i])):
+    #         print(ants[i][j].id, "-")
+
+    #build_ridges()
 
     # DEBUG
     # for i in range(len(ridges)):
@@ -102,7 +114,7 @@ def main():
     #         print(ridges[i][j])
     # print(ridges[30][14])
 
-    next_city()
+    #next_city()
 
 
 if __name__ == "__main__":

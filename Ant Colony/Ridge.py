@@ -5,16 +5,16 @@ class Ridge:
         self.pheromone = pheromone
         self.heuristic = heuristic
     
-    def get_city_origin(self) -> int:
+    def get_city_origin(self):
         return self.city_origin
     
-    def get_city_destiny(self) -> int:
+    def get_city_destiny(self):
         return self.city_destiny
 
-    def get_pheromone(self) -> float:
+    def get_pheromone(self):
         return self.pheromone
     
-    def get_heuristic(self) -> float:
+    def get_heuristic(self):
         return self.heuristic
     
     def __str__(self):
