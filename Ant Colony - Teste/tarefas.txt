@@ -1,11 +1,5 @@
-TO-DO
 
-1 - Salvar arquivo com os prints de uma rodada para entregar junto com o código
-2 - Atualizar os Feromônios
-3 - Salvar melhor, pior e média de cada iteração
-4 - Rodar o algoritmo n épocas
-5 - Concertar valores
 
 DÚVIDAS
 
-1 - No cálculo da distância da rota é necessário contar a distância da última cidade para a primeira?
+1 - A aresta 3-5 é a mesma coisa que a aresta 5-3 em relação aos feromônios
