@@ -18,10 +18,12 @@ fit_value = [] # Fitness Values
 fit_value_sorted = [] # Fitness Values Sorted
 fit_add = [] # Fitness sum
 fit_parents = [] # Selected parents
+best_genes = []
+best_genes_final = []
 
 def populating():
     global populations
-    populations = ([[random.uniform(0,10) for x in range(2)] for i in range(SIZE_POPULATION)])
+    populations = ([[random.uniform(-10,10) for x in range(2)] for i in range(SIZE_POPULATION)])
 
 def f_X(x1,x2):
     return math.sqrt(x1) * math.sin(x1) * math.sqrt(x2) * math.sin(x2) + 10
@@ -33,11 +35,18 @@ def fitness_score():
     # Calculating the fitness for each individual
     for i in range(SIZE_POPULATION) :
         chromosome_value = f_X(populations[i][0], populations[i][1])
+        individual = populations[i]
         fit_value.append(chromosome_value)
+
+        # Vetor de tuplas que linka individuo com seu valor de fx
+        best_genes.append((individual, chromosome_value))
 
     # Sorting the fit_value vector to get the best and worst individual of the population
     fit_value_sorted = fit_value.copy()
     fit_value_sorted.sort(reverse=True)
+
+    best_genes_final = best_genes.copy()
+    best_genes_final.sort(reverse=True, )
 
     # Saving the best individual of the population
     best_individuals.append(fit_value_sorted[0])

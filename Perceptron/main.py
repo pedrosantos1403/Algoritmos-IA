@@ -3,8 +3,6 @@ import numpy
 import random
 import pandas as pd
 from classes import Matrix
-# import matplotlib.pyplot as plt   # better go to jupyter now
-# import seaborn as sns
 
 # learning rate
 ALFA = 0.1
