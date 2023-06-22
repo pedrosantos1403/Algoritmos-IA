@@ -2,10 +2,6 @@ from math import exp
 import numpy as np
 import random
 import pandas as pd
-<<<<<<< HEAD
-from classes import Matrix
-=======
->>>>>>> 4dbc2e7191587fd1b969d75bc1ead9d040704b11
 
 
 class Matrix:
